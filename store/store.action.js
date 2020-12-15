@@ -35,7 +35,7 @@ export const loadPlaces = () => {
   return async dispatch => {
     try {
       const fetchData = await fetchPlaces()
-      console.log(fetchData.rows._array)
+      // console.log(fetchData)
       dispatch({ type: FETCH_PLACES, places: fetchData.rows._array })
     } catch (err) {
       throw err;

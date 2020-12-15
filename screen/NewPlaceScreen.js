@@ -8,7 +8,7 @@ import {
   Button
 } from 'react-native';
 import ImageSelector from '../components/ImageSelector'
-
+import LocationPicker from '../components/LocationPicker'
 import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/store.action';
 
@@ -44,6 +44,7 @@ const NewPlacesScreen = props => {
         <ImageSelector
           onImageTaken={imageTakenHandler}
         />
+        <LocationPicker />
         <Button
           title="Save Place"
           color="orange"
