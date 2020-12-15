@@ -7,8 +7,9 @@ import {
   ScrollView,
   Button
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import ImageSelector from '../components/ImageSelector'
 
+import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/store.action';
 
 const NewPlacesScreen = props => {
@@ -35,7 +36,7 @@ const NewPlacesScreen = props => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
-
+        <ImageSelector />
         <Button
           title="Save Place"
           color="orange"
