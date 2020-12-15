@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
-    backgroundColor: 'blue',
+    backgroundColor: '#ccc',
     borderColor: 'orange',
     borderWidth: 1
   },
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    color: '#666',
+    color: 'black',
     fontSize: 18,
     marginBottom: 5
   },

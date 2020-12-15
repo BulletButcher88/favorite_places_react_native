@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView, Button } from 'react-native';
-// import { HeaderTitle } from 'react-navigation-stack';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  Button
+} from 'react-native';
 import { useDispatch } from 'react-redux';
+
 import * as placesActions from '../store/store.action';
 
 const NewPlacesScreen = props => {
@@ -16,7 +23,7 @@ const NewPlacesScreen = props => {
 
   const savePlaceHandler = () => {
     dispatch(placesActions.addPlace(titleValue))
-    // props.navigation.goBack()
+    props.navigation.goBack()
   }
 
   return (
@@ -25,10 +32,14 @@ const NewPlacesScreen = props => {
         <Text style={styles.label}>Title</Text>
         <TextInput
           style={styles.input}
+          onChangeText={titleChangeHandler}
           value={titleValue}
-          onChange={titleChangeHandler} />
+        />
 
-        <Button title="Save Place" color="orange" onPress={savePlaceHandler} />
+        <Button
+          title="Save Place"
+          color="orange"
+          onPress={savePlaceHandler} />
       </View>
     </ScrollView>
   )
