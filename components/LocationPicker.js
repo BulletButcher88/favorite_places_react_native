@@ -8,6 +8,7 @@ import {
   Alert
 } from 'react-native';
 
+import MapPreview from '../components/MapPreview'
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
@@ -52,10 +53,10 @@ const LocationPicker = props => {
 
   return (
     <View style={styles.locationPicker}>
-      <View style={styles.mapView}>
-        {isFetching ? <ActivityIndicator size='large' color='orange' /> : <Text style={styles.text}>No location selected yet...</Text>}
-      </View>
-      <Button title='Get Location' color='orange' onPress={getLocationHandler} />
+      <MapPreview location={location} style={styles.mapView}>
+        {isFetching ? <ActivityIndicator size='large' color='orange' /> : <Button title='Get Location' color='orange' onPress={getLocationHandler} />}
+      </MapPreview>
+
     </View>
   )
 };
@@ -68,11 +69,9 @@ const styles = StyleSheet.create({
   mapView: {
     marginBottom: 15,
     width: '100%',
-    height: 100,
+    height: 150,
     borderColor: 'orange',
     borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   text: {
     color: 'grey'
