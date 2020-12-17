@@ -10,7 +10,7 @@ import {
 
 import MapPreview from '../components/MapPreview'
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
+// import * as Permissions from 'expo-permissions';
 
 
 const LocationPicker = props => {
@@ -33,7 +33,7 @@ const LocationPicker = props => {
     }
     try {
       setIsFetching(true)
-      const locationResult = await Location.getCurrentPositionAsync({ timeout: 5000 });
+      const locationResult = await Location.getCurrentPositionAsync({ timeout: 3000 });
       setLocation({
         lat: locationResult.coords.latitude,
         lng: locationResult.coords.longitude
@@ -51,12 +51,16 @@ const LocationPicker = props => {
     setIsFetching(false)
   }
 
+  const setLocationPin = () => {
+    props.navigation.navigate('Map')
+  }
+
   return (
     <View style={styles.locationPicker}>
-      <MapPreview location={location} style={styles.mapView}>
+      <MapPreview onPress={setLocationPin} location={location} style={styles.mapView}>
         {isFetching ? <ActivityIndicator size='large' color='orange' /> : <Button title='Get Location' color='orange' onPress={getLocationHandler} />}
       </MapPreview>
-
+      <Button title='Pick location on map' color='orange' onPress={setLocationPin} />
     </View>
   )
 };

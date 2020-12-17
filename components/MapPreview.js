@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Image, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import ENV from '../env';
@@ -25,7 +25,7 @@ const MapPreview = props => {
 
 
   return (
-    <View style={{ ...styles.mapView, ...props.style }}>
+    <TouchableOpacity onPress={props.onPress} style={{ ...styles.mapView, ...props.style }}>
       {props.location ?
         <MapView
           maximumZ={19}
@@ -35,7 +35,7 @@ const MapPreview = props => {
           <Marker coordinate={imagePreviewUrl}></Marker>
         </MapView> :
         props.children}
-    </View>
+    </TouchableOpacity>
   )
 }
 
