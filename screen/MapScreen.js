@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import MapView, { Marker } from 'react-native-maps';
 
 
@@ -22,6 +22,21 @@ const MapScreen = props => {
     })
   }
 
+  const saveLocationPickerHandler = useCallback(
+    () => {
+      if (!selectedLocation) {
+        Alert.alert("Try again", 'Please drop a pin on the location', [{ text: 'OK' }])
+        return;
+      }
+      props.navigation.navigate('NewPlace', { pickedLocation: selectedLocation })
+    },
+    [selectedLocation],
+  )
+  useEffect(() => {
+    props.navigation.setParams({ saveLocation: saveLocationPickerHandler })
+  }, [saveLocationPickerHandler])
+
+
   let markerLocation;
 
   if (selectedLocation) {
@@ -39,9 +54,11 @@ const MapScreen = props => {
 }
 
 MapScreen.navigationOptions = navData => {
+  const saveFn = navData.navigation.getParam('saveLocation')
+
   return {
     headerRight: (
-      <TouchableOpacity style={styles.headerButton} onPress={() => { }}>
+      <TouchableOpacity style={styles.headerButton} onPress={saveFn}>
         <Text style={styles.headerButtonText}>Save</Text>
       </TouchableOpacity>
     )
