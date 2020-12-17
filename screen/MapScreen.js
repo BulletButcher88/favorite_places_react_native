@@ -18,7 +18,9 @@ const MapScreen = props => {
   const selectionLocationHandler = event => {
     setSelectedLocation({
       lat: event.nativeEvent.coordinate.latitude,
-      lng: event.nativeEvent.coordinate.longitude
+      lng: event.nativeEvent.coordinate.longitude,
+      latitudeDelta: 0.009,
+      longitudeDelta: 0.009
     })
   }
 
@@ -42,12 +44,14 @@ const MapScreen = props => {
   if (selectedLocation) {
     markerLocation = {
       latitude: selectedLocation.lat,
-      longitude: selectedLocation.lng
+      longitude: selectedLocation.lng,
+      latitudeDelta: 0.009,
+      longitudeDelta: 0.009
     }
   }
 
   return (
-    <MapView style={styles.map} region={imagePreviewUrl} onPress={selectionLocationHandler} >
+    <MapView style={styles.map} initialRegion={imagePreviewUrl} region={markerLocation} onPress={selectionLocationHandler} >
       {selectedLocation && <Marker title="Picker Mark" coordinate={markerLocation} />}
     </MapView>
   )

@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View, Image, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
-import ENV from '../env';
+// import ENV from '../env';
 
 const MapPreview = props => {
 

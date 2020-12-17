@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,17 @@ import * as Location from 'expo-location';
 const LocationPicker = props => {
   const [isFetching, setIsFetching] = useState(false)
   const [location, setLocation] = useState(null);
+
+  const pickedLocation = props.navigation.getParam('pickedLocation')
+
+  const { onLocationPicked } = props;
+
+  useEffect(() => {
+    if (pickedLocation) {
+      setLocation(pickedLocation)
+      onLocationPicked(pickedLocation)
+    }
+  }, [pickedLocation, onLocationPicked])
 
   const verifyPermission = async () => {
     let { status } = await Location.requestPermissionsAsync();
@@ -38,7 +49,10 @@ const LocationPicker = props => {
         lat: locationResult.coords.latitude,
         lng: locationResult.coords.longitude
       })
-
+      props.onLocationPicked({
+        lat: locationResult.coords.latitude,
+        lng: locationResult.coords.longitude
+      })
     } catch (err) {
       Alert.alert(
         'Could not find location',
