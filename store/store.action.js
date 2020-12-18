@@ -1,10 +1,27 @@
 import * as FileSystem from 'expo-file-system';
 import { insertPlace, fetchPlaces } from '../helpers/db'
+import Geocoder from 'react-native-geocoding';
+import ENV from '../env';
+
 export const ADD_PLACE = 'ADD_PLACE';
 export const FETCH_PLACES = 'FETCH_PLACES';
 
-export const addPlace = (title, image) => {
+
+export const addPlace = (title, image, location) => {
+
   return async dispatch => {
+    Geocoder.init(ENV.googleAPIKey);
+
+    Geocoder.from(location)
+      .then(json => {
+        var addressComponent = json.results[0].address_components[0];
+        console.log(addressComponent);
+      })
+      .catch(error => console.warn(error));
+
+    console.log(reverseGeo)
+
+
     const fileName = image.split('/').pop()
     const newFilePath = FileSystem.documentDirectory + fileName;
 
@@ -33,6 +50,7 @@ export const addPlace = (title, image) => {
 
 export const loadPlaces = () => {
   return async dispatch => {
+
     try {
       const fetchData = await fetchPlaces()
       // console.log(fetchData)
