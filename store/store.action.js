@@ -23,6 +23,7 @@ export const addPlace = (title, image, address) => {
       .catch(error => console.warn(error));
 
     const fileName = image.split('/').pop()
+    console.log(fileName)
     const newFilePath = FileSystem.documentDirectory + fileName;
 
     try {

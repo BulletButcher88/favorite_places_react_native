@@ -44,7 +44,7 @@ const LocationPicker = props => {
     }
     try {
       setIsFetching(true)
-      const locationResult = await Location.getCurrentPositionAsync({ timeout: 3000 });
+      const locationResult = await Location.getCurrentPositionAsync({ timeout: 5000 });
       setLocation({
         lat: locationResult.coords.latitude,
         lng: locationResult.coords.longitude
