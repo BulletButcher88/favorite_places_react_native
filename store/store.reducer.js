@@ -14,16 +14,20 @@ export default (state = initialState, action) => {
             pl.id.toString(),
             pl.title,
             pl.imageUri,
-            // pl.location
+            pl.address,
+            pl.lat,
+            pl.lng
           ))
       };
     case ADD_PLACE:
       const newPlace = new Place(
         action.placeData.id.toString(),
         action.placeData.title,
-        action.placeData.image
-        // action.placeData.location
-        );
+        action.placeData.imageUri,
+        action.placeData.address,
+        action.placeData.coords.lat,
+        action.placeData.coords.lng,
+      );
       return {
         places: state.places.concat(newPlace)
       };

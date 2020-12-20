@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import * as FileSystem from 'expo-file-system';
 import { insertPlace, fetchPlaces } from '../helpers/db'
 import Geocoder from 'react-native-geocoding';
@@ -7,20 +8,19 @@ export const ADD_PLACE = 'ADD_PLACE';
 export const FETCH_PLACES = 'FETCH_PLACES';
 
 
-export const addPlace = (title, image, location) => {
-
+export const addPlace = (title, image, address) => {
   return async dispatch => {
-    Geocoder.init(ENV.googleAPIKey);
 
-    Geocoder.from(location)
+    let geoAddress;
+    Geocoder.init(ENV.googleAPIKey);
+    const response = await Geocoder.from(address.lat, address.lng)
       .then(json => {
-        var addressComponent = json.results[0].address_components[0];
-        console.log(addressComponent);
+        if (!json.results) {
+          throw new Error('Error: no result response from geocoder API')
+        }
+        geoAddress = json.results[0].formatted_address
       })
       .catch(error => console.warn(error));
-
-    console.log(reverseGeo)
-
 
     const fileName = image.split('/').pop()
     const newFilePath = FileSystem.documentDirectory + fileName;
@@ -30,15 +30,22 @@ export const addPlace = (title, image, location) => {
         from: image,
         to: newFilePath
       })
+
       const dbResult = await insertPlace(
         title,
         newFilePath,
-        "Dummy Address",
-        15.4,
-        13.8
+        geoAddress,
+        address.lat,
+        address.lng
       )
-      console.log(dbResult)
-      dispatch({ type: ADD_PLACE, placeData: { id: dbResult.insertId, title: title, image: newFilePath } })
+      dispatch({
+        type: ADD_PLACE, placeData: {
+          id: dbResult.insertId, title: title, imageUri: newFilePath, address: geoAddress, coords: {
+            lat: address.lat,
+            lng: address.lng
+          }
+        }
+      })
 
     } catch (error) {
       console.log(error);

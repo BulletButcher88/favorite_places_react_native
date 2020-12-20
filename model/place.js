@@ -1,9 +1,11 @@
 class Place {
-  constructor(id, title, imageUri) {
+  constructor(id, title, imageUri, address, lat, lng) {
     this.id = id;
     this.title = title;
     this.imageUri = imageUri;
-    // this.location = location
+    this.address = address;
+    this.lat = lat;
+    this.lng = lng;
   }
 }
 
