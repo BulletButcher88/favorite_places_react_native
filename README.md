@@ -1,5 +1,5 @@
-# SQLite React-Native CRUD App
+# React-Native CRUD App
 
-<h5>Save geolocation or pin picker, with camera roll access to clients database/device</h5>
+<h5>Save the geoposition or a placed a pin location and access to the camera roll and saves data using SQLite to clients database/device</h5>
 <img src="./assets/SQLite-RN.gif" width="300" height="600">
 <br>
