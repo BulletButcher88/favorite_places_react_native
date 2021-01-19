@@ -13,7 +13,7 @@ export const addPlace = (title, image, address) => {
 
     let geoAddress;
     Geocoder.init(ENV.googleAPIKey);
-    const response = await Geocoder.from(address.lat, address.lng)
+    await Geocoder.from(address.lat, address.lng)
       .then(json => {
         if (!json.results) {
           throw new Error('Error: no result response from geocoder API')
@@ -23,9 +23,8 @@ export const addPlace = (title, image, address) => {
       .catch(error => console.warn(error));
 
     const fileName = image.split('/').pop()
-    console.log(fileName)
     const newFilePath = FileSystem.documentDirectory + fileName;
-
+    console.log(geoAddress)
     try {
       await FileSystem.moveAsync({
         from: image,
