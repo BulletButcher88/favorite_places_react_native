@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case DELETE_PLACE:
       return {
-        places: state.places.filter(pla => pla.id === action.places.id)
+        places: state.places.filter(pla => pla.id === action.placeId.id)
       }
     case FETCH_PLACES:
       return {

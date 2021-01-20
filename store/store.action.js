@@ -60,7 +60,6 @@ export const loadPlaces = () => {
 
     try {
       const fetchData = await fetchPlaces()
-      // console.log(fetchData)
       dispatch({ type: FETCH_PLACES, places: fetchData.rows._array })
     } catch (err) {
       throw err;
@@ -72,8 +71,7 @@ export const deletePlace = (id) => {
   return async dispatch => {
     try {
       const deletedItem = await deleteItem(id)
-      console.log(deletedItem)
-      dispatch({ type: DELETE_PLACE, places: deletedItem.rows._array })
+      dispatch({ type: DELETE_PLACE, placeId: id })
     } catch (err) {
       throw err;
     }
