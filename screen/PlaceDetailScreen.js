@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import MapPreview from '../components/MapPreview'
@@ -11,7 +11,6 @@ const PlaceDetailScreen = props => {
   const selectedLocation = { lat: placeData.lat, lng: placeData.lng };
 
   const showMapHandler = () => {
-    console.log('HANDLER TRIGGED!!!!!!!!!!!!!!!!!!!!!')
     props.navigation.navigate('Map', { readonly: true, initialLocation: selectedLocation });
   }
 
@@ -20,8 +19,9 @@ const PlaceDetailScreen = props => {
       <View style={styles.scrollView}>
         <Image style={styles.image} source={{ uri: placeData.imageUri }} />
         <Text style={styles.title}>{placeData.title}</Text>
-        <View
-          style={styles.locationContainer}>
+        <TouchableOpacity
+          style={styles.locationContainer}
+        >
 
           <MapPreview
             style={styles.map}
@@ -33,7 +33,7 @@ const PlaceDetailScreen = props => {
             <Text style={styles.address}>{placeData.address}</Text>
           </View>
 
-        </View>
+        </TouchableOpacity>
 
       </View>
     </ScrollView>

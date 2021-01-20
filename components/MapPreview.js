@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View, Image, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 // import ENV from '../env';
 
 const MapPreview = props => {
-
 
   let imagePreviewUrl;
 
@@ -16,18 +15,15 @@ const MapPreview = props => {
       latitudeDelta: 0.009,
       longitudeDelta: 0.009
     };
-    //   // imagePreviewUrl = `https://www.google.com/maps/@?api=1&map_action=map&center=${props.location.lat},${props.location.lng}&zoom=12&basemap=terrain&key=${ENV.googleAPIKey}`
-    //   imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.lat},${props.location.lng}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:A%7C${props.location.lat},${props.location.lng}&key=${ENV.googleAPIKey}`;
   }
 
-  // console.log(imagePreviewUrl)
-
-
-
   return (
-    <TouchableOpacity onPress={props.onPress} style={{ ...styles.mapView, ...props.style }}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={{ ...styles.mapView, ...props.style }}>
       {props.location ?
         <MapView
+          {...props}
           maximumZ={19}
           style={styles.mapImage}
           region={imagePreviewUrl}
