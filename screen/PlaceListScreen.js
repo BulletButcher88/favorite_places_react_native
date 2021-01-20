@@ -11,6 +11,7 @@ const PlaceListScreen = props => {
   const places = useSelector(state => state.places.places)
   const dispatch = useDispatch()
 
+
   useEffect(() => {
     dispatch(placesAction.loadPlaces())
   }, [dispatch])

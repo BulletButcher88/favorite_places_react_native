@@ -8,8 +8,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case DELETE_PLACE:
+      const itemId = action.placeId
       return {
-        places: state.places.filter(pla => pla.id === action.placeId.id)
+        places: state.places.filter(pla => pla.id === itemId)
       }
     case FETCH_PLACES:
       return {
