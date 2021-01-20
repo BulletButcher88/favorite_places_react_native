@@ -1,17 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import * as placesAction from '../store/store.action'
 
 import MapPreview from '../components/MapPreview'
 
 const PlaceDetailScreen = props => {
+
   const itemId = props.navigation.getParam('placeId')
   const placeData = useSelector(state => state.places.places.find(pla => pla.id === itemId))
+  const dispatch = useDispatch()
 
   const selectedLocation = { lat: placeData.lat, lng: placeData.lng };
 
   const showMapHandler = () => {
     props.navigation.navigate('Map', { readonly: true, initialLocation: selectedLocation });
+  }
+
+  const deleteHandler = () => {
+    dispatch(placesAction.deletePlace(itemId))
+    props.navigation.navigate('Places')
   }
 
   return (
@@ -34,7 +42,12 @@ const PlaceDetailScreen = props => {
           </View>
 
         </TouchableOpacity>
-
+        <TouchableOpacity
+          style={styles.delButton}
+          onPress={deleteHandler}
+        >
+          <Text style={{ color: 'white', fontWeight: '800' }}>Delete</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   )
@@ -89,6 +102,20 @@ const styles = StyleSheet.create({
   },
   addressContainer: {
     padding: 10
+  },
+  delButton: {
+    flex: 1,
+    position: 'absolute',
+    backgroundColor: '#c91a00',
+    top: 30,
+    right: 30,
+    height: 60,
+    width: 60,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'white',
+    borderWidth: 2
   }
 })
 

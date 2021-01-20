@@ -22,6 +22,7 @@ const PlaceListScreen = props => {
         keyExtractor={item => item.id}
         renderItem={itemData =>
           <PlaceItem
+            id={itemData.item.id}
             image={itemData.item.imageUri}
             title={itemData.item.title}
             address={itemData.item.address}

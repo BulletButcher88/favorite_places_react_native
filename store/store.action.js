@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import * as FileSystem from 'expo-file-system';
-import { insertPlace, fetchPlaces } from '../helpers/db'
+import { insertPlace, fetchPlaces, deleteItem } from '../helpers/db'
 import Geocoder from 'react-native-geocoding';
 import ENV from '../env';
 
 export const ADD_PLACE = 'ADD_PLACE';
 export const FETCH_PLACES = 'FETCH_PLACES';
-
+export const DELETE_PLACE = 'DELETE_PLACE';
 
 export const addPlace = (title, image, address) => {
   return async dispatch => {
@@ -62,6 +62,18 @@ export const loadPlaces = () => {
       const fetchData = await fetchPlaces()
       // console.log(fetchData)
       dispatch({ type: FETCH_PLACES, places: fetchData.rows._array })
+    } catch (err) {
+      throw err;
+    }
+  }
+}
+
+export const deletePlace = (id) => {
+  return async dispatch => {
+    try {
+      const deletedItem = await deleteItem(id)
+      console.log(deletedItem)
+      dispatch({ type: DELETE_PLACE, places: deletedItem.rows._array })
     } catch (err) {
       throw err;
     }
