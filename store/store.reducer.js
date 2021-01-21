@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case DELETE_PLACE:
       const itemId = action.placeId
       return {
-        places: state.places.filter(pla => pla.id === itemId)
+        places: state.places.splice(pla => pla.id === itemId)
       }
     case FETCH_PLACES:
       return {

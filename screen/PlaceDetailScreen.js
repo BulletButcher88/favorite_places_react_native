@@ -19,7 +19,7 @@ const PlaceDetailScreen = props => {
 
   const deleteHandler = () => {
     dispatch(placesAction.deletePlace(itemId))
-    props.navigation.navigate('Places')
+    props.navigation.navigate('Places', { loading: true })
   }
 
   return (
