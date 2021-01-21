@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Platform, FlatList } from 'react-native'
+import { View, StyleSheet, Platform, FlatList } from 'react-native'
 import { Item, HeaderButtons } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/HeaderButton'
 import { useSelector, useDispatch } from 'react-redux';
@@ -41,15 +41,18 @@ const PlaceListScreen = props => {
 }
 
 const styles = StyleSheet.create({
-
+  addButton: {
+    color: 'white'
+  }
 })
 
 PlaceListScreen.navigationOptions = navData => {
   return {
     headerTitle: "All places",
-    headerRight: <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+    headerRight: <HeaderButtons HeaderButtonComponent={CustomHeaderButton} >
       <Item
         title='Add Item'
+        color='white'
         iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
         onPress={() => {
           navData.navigation.navigate('NewPlace')

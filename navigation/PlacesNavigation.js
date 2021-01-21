@@ -13,7 +13,7 @@ const PlaceNavigator = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: 'orange'
+      backgroundColor: 'black'
     },
     headerTintColor: "white",
     headerTitle: "MAP"

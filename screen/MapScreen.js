@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   },
   headerButtonText: {
     fontSize: 16,
-    color: "#444"
+    color: "white"
   }
 })
 
