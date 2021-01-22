@@ -17,6 +17,7 @@ const PlaceDetailScreen = props => {
     props.navigation.navigate('Map', { readonly: true, initialLocation: selectedLocation });
   }
 
+  //PlaceListScreen isn't updating after the below is called.
   const deleteHandler = () => {
     dispatch(placesAction.deletePlace(itemId))
     props.navigation.navigate('Places', { loading: true })

@@ -25,7 +25,7 @@ const PlaceListScreen = props => {
 
   //sends a true value when redirected back to this page
   const loading = props.navigation.getParam('loading')
-
+  // The hook above isn't refreshing when this screen is re-loading after item is deleted on PlaceDetailScreen
   const { places, isLoading } = useFetchHook(loading)
 
 
