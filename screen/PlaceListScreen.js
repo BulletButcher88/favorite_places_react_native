@@ -7,8 +7,8 @@ import PlaceItem from '../components/PlaceItem';
 import * as placesAction from '../store/store.action'
 
 
-const fetchData = state => {
-
+const useFetchHook = state => {
+  //redux is updating 
   const places = useSelector(state => state.places.places)
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(state)
@@ -16,13 +16,18 @@ const fetchData = state => {
   useEffect(() => {
     dispatch(placesAction.loadPlaces())
     setIsLoading(false)
-  }, []);
+  }, [dispatch]);
+
   return { places, isLoading }
 }
 
 const PlaceListScreen = props => {
+
+  //sends a true value when redirected back to this page
   const loading = props.navigation.getParam('loading')
-  const { places, isLoading } = fetchData(loading)
+
+  const { places, isLoading } = useFetchHook(loading)
+
 
   return (
     <View>
