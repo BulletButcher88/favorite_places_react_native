@@ -70,6 +70,7 @@ export const deletePlace = (id) => {
   return async dispatch => {
     try {
       const deletedItem = await deleteItem(id)
+      console.log(deletedItem)
       dispatch({ type: DELETE_PLACE, placeId: id })
     } catch (err) {
       throw err;

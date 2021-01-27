@@ -10,6 +10,7 @@ import * as placesAction from '../store/store.action'
 const useFetchHook = state => {
   //redux is updating 
   const places = useSelector(state => state.places.places)
+  // console.log(places)
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(state)
 
@@ -27,7 +28,6 @@ const PlaceListScreen = props => {
   const loading = props.navigation.getParam('loading')
   // The hook above isn't refreshing when this screen is re-loading after item is deleted on PlaceDetailScreen
   const { places, isLoading } = useFetchHook(loading)
-
 
   return (
     <View>

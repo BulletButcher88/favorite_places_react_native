@@ -9,8 +9,9 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case DELETE_PLACE:
       const itemId = action.placeId
+      const newState = state.places.splice(pla => pla.id === itemId)
       return {
-        places: state.places.splice(pla => pla.id === itemId)
+        places: newState
       }
     case FETCH_PLACES:
       return {

@@ -63,6 +63,7 @@ export const deleteItem = (id) => {
         [id],
         (_, result) => {
           resolve(result);
+          console.log('result from SQLite DB', result)
         },
         (_, err) => {
           reject(err);
